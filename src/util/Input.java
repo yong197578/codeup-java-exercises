@@ -1,5 +1,8 @@
 package util;
 
+import lecture.Person;
+
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Input {
@@ -10,7 +13,7 @@ public class Input {
     }
 
     public String getString() {
-        System.out.print("Enter Any String: ");
+        System.out.print("Please Enter: ");
         return scanner.nextLine();
     }
     public String getString(String prompt){
@@ -68,25 +71,46 @@ public class Input {
     }
     public int getInt2(int min, int max){
         System.out.println("Please enter number between " + min  + "and " + max );
+
         int userInput = scanner.nextInt();
         if(userInput < min || userInput > max){
             return getInt2(min, max);
         }
         return userInput;
+
     }
-    public int getInt2(){
-        System.out.println("Please Enter a Number: ");
-        int userInput = scanner.nextInt();
-        return userInput;
+    public int getInt2() {
+//        System.out.println("Please Enter a Number: ");
+//        int userInput = scanner.nextInt();
+//        return userInput;
+        while (true) {
+            try {
+                System.out.println("Please Enter Integer:");
+                String userInput = getString();
+                return Integer.valueOf(userInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Input. Try again");
+            }
+        }
     }
     public double getDouble() {
-        System.out.print("Please enter a number including a decimal value: ");
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Invalid input, please enter a number: ");
-            scanner.nextLine();
-        }
-        double input = scanner.nextDouble();
-        return input;
+//        System.out.print("Please enter a number including a decimal value: ");
+//        while (!scanner.hasNextDouble()) {
+//            System.out.print("Invalid input, please enter a number: ");
+//            scanner.nextLine();
+//        }
+//        double input = scanner.nextDouble();
+//        return input;
+
+       while(true){
+           try{
+               System.out.println("Please Enter number:");
+               String userInput = getString();
+               return Double.parseDouble(userInput);
+           } catch(NumberFormatException e){
+               System.out.println("Wrong input. Please enter number including decimal");
+           }
+       }
     }
 
     public double getDouble(double min, double max) {
@@ -100,5 +124,38 @@ public class Input {
             input = scanner.nextDouble();
         } while (input < min || input > max);
         return input;
+    }
+    public int getBinary(){
+        while(true){
+            try{
+                System.out.println("Please Enter Binary Number");
+                String userInput = getString();
+                return Integer.valueOf(userInput, 2);
+            }catch(NumberFormatException e){
+                System.out.println("wrong input. please try again");
+            }
+        }
+    }
+    public int getHexidecimal() {
+        while(true){
+            try{
+                System.out.println("Enter Hexidecimal Number");
+                String userInput = getString();
+                return Integer.valueOf(userInput, 16);
+            }catch (NumberFormatException e){
+                System.out.println("wrong input. please try again");
+            }
+        }
+
+    }
+    public String getGroceryListYesOrNo() {
+        System.out.println("Would like to get your grocery list? yes/no");
+        return scanner.nextLine();
+    }
+    public String getGroceryList(){
+        return scanner.nextLine();
+    }
+    public Integer getGroceryListNum(){
+        return scanner.nextInt();
     }
 }
